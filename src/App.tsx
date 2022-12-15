@@ -1,6 +1,6 @@
 import { Component, createSignal, onMount, For, createEffect } from "solid-js";
 import axios from "axios";
-import { unix } from "moment";
+import * as moment from "moment";
 
 type Article = {
   by: string;
@@ -94,7 +94,7 @@ const App: Component = () => {
           <For each={articles()}>
             {({ title, score, by, time, url }) => {
               const articleDate = new Date(time) as unknown as number; // in unix time
-              const timePast = unix(articleDate).fromNow();
+              const timePast = moment.unix(articleDate).fromNow();
               return (
                 <article>
                   <a href={url} target="_blank" rel="noopener noreferrer">
